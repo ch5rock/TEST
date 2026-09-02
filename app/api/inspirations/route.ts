@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { getDb } from "@/db";
 import { inspirations } from "@/db/schema";
-import { userFromHeaders } from "@/lib/auth";
+import { userForRequest, withGuestCookie } from "@/lib/auth";
 import { ensureUser } from "@/lib/data";
 
 const allowedTypes = new Set(["text", "image", "audio", "video", "design"]);
@@ -9,8 +9,7 @@ const allowedLicenses = new Set(["열람 전용", "개인 이용", "상업 이�
 
 export async function POST(request: Request) {
   try {
-    const user = userFromHeaders(request.headers);
-    if (!user) return Response.json({ error: "로그인이 필요합니다." }, { status: 401 });
+    const { user, guestCookie } = userForRequest(request);
     const form = await request.formData();
     const title = String(form.get("title") ?? "").trim();
     const summary = String(form.get("summary") ?? "").trim();
@@ -45,7 +44,7 @@ export async function POST(request: Request) {
       price: Math.round(price), tags: JSON.stringify(tags), parentId, mediaKey, mediaName, mediaType,
     }).returning();
 
-    return Response.json({ inspiration: created }, { status: 201 });
+    return withGuestCookie(Response.json({ inspiration: created }, { status: 201 }), guestCookie);
   } catch (error) {
     const message = error instanceof Error ? error.message : "등록 중 오류가 발생했습니다.";
     return Response.json({ error: message }, { status: 500 });

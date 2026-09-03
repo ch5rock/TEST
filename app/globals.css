@@ -136,44 +136,6 @@ body {
   color: #17313a;
 }
 
-.motifoot-wordmark {
-  display: inline-flex;
-  align-items: center;
-  color: #17313a;
-  font-size: 1.08rem;
-  font-weight: 950;
-  letter-spacing: -0.065em;
-  line-height: 1;
-}
-
-.motifoot-step {
-  display: inline-grid;
-  width: 1.3rem;
-  height: 1.3rem;
-  place-items: center;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  letter-spacing: 0;
-  transition: transform 180ms ease;
-}
-
-.motifoot-step-blue {
-  margin-left: 0.08rem;
-  background: #249bd3;
-  color: #ffffff;
-  transform: translateY(-2px) rotate(-7deg);
-}
-
-.motifoot-step-lime {
-  margin-right: 0.08rem;
-  background: #d5ff63;
-  color: #126f9f;
-  transform: translateY(3px) rotate(7deg);
-}
-
-.group:hover .motifoot-step-blue { transform: translateY(-4px) rotate(-7deg); }
-.group:hover .motifoot-step-lime { transform: translateY(5px) rotate(7deg); }
-
 .eyebrow {
   display: flex;
   align-items: center;

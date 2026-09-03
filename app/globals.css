@@ -19,38 +19,38 @@
 }
 
 :root {
-  --background: #f7f7f2;
-  --foreground: #101010;
+  --background: #f4fbff;
+  --foreground: #17313a;
   --card: #ffffff;
-  --card-foreground: #171717;
+  --card-foreground: #17313a;
   --popover: #ffffff;
   --popover-foreground: #171717;
-  --primary: #101010;
+  --primary: #126f9f;
   --primary-foreground: #ffffff;
-  --secondary: #e7e8ff;
-  --secondary-foreground: #1822ff;
-  --muted: #efefe9;
-  --muted-foreground: #6a6a66;
-  --accent: #d7ff43;
-  --accent-foreground: #101010;
+  --secondary: #dff4ff;
+  --secondary-foreground: #126f9f;
+  --muted: #e9f7ef;
+  --muted-foreground: #587078;
+  --accent: #d5ff63;
+  --accent-foreground: #17313a;
   --destructive: #e7000b;
-  --border: #d9d9d2;
-  --input: #d2d2ca;
-  --ring: #1822ff;
+  --border: #cfe3e9;
+  --input: #bfd9e2;
+  --ring: #249bd3;
   --chart-1: #f54900;
   --chart-2: #009689;
   --chart-3: #104e64;
   --chart-4: #ffb900;
   --chart-5: #fe9a00;
   --radius: 0.9rem;
-  --sidebar: #fafafa;
-  --sidebar-foreground: #171717;
-  --sidebar-primary: #171717;
+  --sidebar: #f4fbff;
+  --sidebar-foreground: #17313a;
+  --sidebar-primary: #126f9f;
   --sidebar-primary-foreground: #fafafa;
-  --sidebar-accent: #f5f5f5;
-  --sidebar-accent-foreground: #171717;
-  --sidebar-border: #e5e5e5;
-  --sidebar-ring: #a1a1a1;
+  --sidebar-accent: #e5f8ff;
+  --sidebar-accent-foreground: #17313a;
+  --sidebar-border: #cfe3e9;
+  --sidebar-ring: #249bd3;
 }
 
 @theme inline {
@@ -106,7 +106,7 @@ body {
 }
 
 ::selection {
-  background: #1822ff;
+  background: #d5ff63;
   color: #ffffff;
 }
 
@@ -133,7 +133,7 @@ body {
 
 .nav-link:hover {
   background: rgb(16 16 16 / 0.06);
-  color: #101010;
+  color: #17313a;
 }
 
 .eyebrow {
@@ -157,8 +157,8 @@ body {
 
 .inspiration-card:hover {
   transform: translateY(-4px);
-  border-color: rgb(24 34 255 / 0.5);
-  box-shadow: 0 20px 50px rgb(16 16 16 / 0.09);
+  border-color: rgb(36 155 211 / 0.55);
+  box-shadow: 0 20px 50px rgb(18 111 159 / 0.12);
 }
 
 .form-select {
@@ -172,7 +172,7 @@ body {
   outline: none;
 }
 
-.form-select:focus { border-color: #1822ff; box-shadow: 0 0 0 3px rgb(24 34 255 / 0.12); }
+.form-select:focus { border-color: #249bd3; box-shadow: 0 0 0 3px rgb(36 155 211 / 0.14); }
 
 .prose-copy {
   max-width: 48rem;

@@ -12,12 +12,51 @@ export function InspirationForm({ parentId }: { parentId?: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     setError("");
-    const response = await fetch("/api/inspirations", { method: "POST", body: new FormData(event.currentTarget) });
+    const form = new FormData(event.currentTarget);
+    const file = form.get("file");
+
+    if (file instanceof File && file.size > 0) {
+      if (file.size > 25 * 1024 * 1024) {
+        setError("파일은 25MB 이하만 올릴 수 있습니다.");
+        setLoading(false);
+        return;
+      }
+
+      const uploadId = crypto.randomUUID();
+      const chunkSize = 700 * 1024;
+      const chunkCount = Math.ceil(file.size / chunkSize);
+      try {
+        for (let index = 0; index < chunkCount; index += 1) {
+          const chunk = file.slice(index * chunkSize, Math.min(file.size, (index + 1) * chunkSize));
+          const uploadResponse = await fetch(`/api/uploads/${uploadId}/${index}`, { method: "PUT", body: chunk });
+          if (!uploadResponse.ok) {
+            const uploadError = await uploadResponse.json().catch(() => ({}));
+            throw new Error(uploadError.error ?? "파일 업로드에 실패했습니다.");
+          }
+          setUploadProgress(Math.round(((index + 1) / chunkCount) * 100));
+        }
+      } catch (uploadError) {
+        setError(uploadError instanceof Error ? uploadError.message : "파일 업로드에 실패했습니다.");
+        setLoading(false);
+        return;
+      }
+
+      form.delete("file");
+      form.set("uploadId", uploadId);
+      form.set("chunkCount", String(chunkCount));
+      form.set("mediaName", file.name);
+      form.set("mediaType", file.type || "application/octet-stream");
+      form.set("mediaSize", String(file.size));
+    }
+
+    const response = await fetch("/api/inspirations", { method: "POST", body: form });
     const data = await response.json();
     if (!response.ok) {
       setError(data.error ?? "등록하지 못했습니다.");
@@ -70,9 +109,11 @@ export function InspirationForm({ parentId }: { parentId?: string }) {
       <div className="grid gap-2">
         <Label htmlFor="file">원본 파일 <span className="font-normal text-black/45">선택 · 최대 25MB</span></Label>
         <label className="flex min-h-28 cursor-pointer items-center justify-center gap-3 rounded-2xl border border-dashed border-black/25 bg-white px-5 text-sm font-semibold transition hover:border-[#249bd3] hover:bg-[#effaff]">
-          <UploadCloud className="size-5 text-[#126f9f]" />파일 선택
-          <Input id="file" name="file" type="file" className="sr-only" />
+          <UploadCloud className="size-5 text-[#126f9f]" />
+          <span>{fileName || "파일 선택"}</span>
+          <Input id="file" name="file" type="file" className="sr-only" onChange={(event) => { setFileName(event.target.files?.[0]?.name ?? ""); setUploadProgress(0); }} />
         </label>
+        {loading && fileName && <p className="text-sm font-semibold text-[#126f9f]">파일 업로드 {uploadProgress}%</p>}
       </div>
       {error && <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-700">{error}</p>}
       <Button type="submit" size="lg" disabled={loading} className="h-13 rounded-full bg-[#126f9f] text-base text-white hover:bg-[#0d587e]">

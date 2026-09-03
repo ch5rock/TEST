@@ -24,13 +24,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
     <main>
       <section className="border-b border-black/10 bg-[#d7ff43]">
         <div className="mx-auto grid max-w-[1440px] gap-7 px-4 py-10 sm:px-7 md:grid-cols-[1fr_auto] md:items-end md:py-14">
-          <div><p className="eyebrow"><Sparkles className="size-4" />CREATIVE IP NETWORK</p><h1 className="mt-4 max-w-3xl text-[clamp(2.5rem,6vw,5.8rem)] font-black leading-[0.92] tracking-[-0.07em]">아직 만들어지지 않은 것들이 모이는 곳.</h1></div>
-          <div className="max-w-sm md:pb-2"><p className="text-base font-medium leading-7 text-black/65">텍스트, 이미지, 소리, 영상에서 시작된 영감이 사람을 만나 프로젝트가 됩니다.</p><Button asChild variant="outline" className="mt-5 rounded-full border-black bg-transparent"><Link href="/inspirations/new">첫 영감 올리기<ArrowRight /></Link></Button></div>
+          <div><p className="eyebrow"><Sparkles className="size-4" />CREATIVE IP NETWORK</p><h1 className="mt-4 max-w-3xl text-[clamp(2.5rem,6vw,5.8rem)] font-black leading-[0.92] tracking-[-0.07em]">서로 다른 영감이 발을 맞추는 곳.</h1></div>
+          <div className="max-w-sm md:pb-2"><p className="text-base font-medium leading-7 text-black/65">INFOOT으로 들어온 영감이 사람을 만나 함께 발을 맞추고, OUTFOOT 프로젝트가 됩니다.</p><Button asChild variant="outline" className="mt-5 rounded-full border-black bg-transparent"><Link href="/inspirations/new">첫 영감 올리기<ArrowRight /></Link></Button></div>
         </div>
       </section>
       <section className="mx-auto max-w-[1440px] px-4 py-8 sm:px-7 sm:py-12">
         <div className="flex flex-col gap-5 border-b border-black/10 pb-7 lg:flex-row lg:items-center lg:justify-between">
-          <div><p className="eyebrow text-[#1822ff]">DISCOVER</p><h2 className="mt-2 text-3xl font-black tracking-[-0.045em]">오늘의 영감</h2></div>
+          <div><p className="eyebrow text-[#1822ff]">INFOOT</p><h2 className="mt-2 text-3xl font-black tracking-[-0.045em]">오늘의 영감</h2></div>
           <form className="flex w-full flex-col gap-2 sm:flex-row lg:w-auto" action="/">
             <label className="relative min-w-0 flex-1 lg:w-80"><Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-black/35" /><input name="q" defaultValue={params.q} className="h-11 w-full rounded-full border border-black/15 bg-white pl-11 pr-4 text-sm outline-none focus:border-[#1822ff]" placeholder="제목, 태그, 키워드 검색" /></label>
             <select name="type" defaultValue={params.type ?? "all"} className="h-11 rounded-full border border-black/15 bg-white px-4 text-sm font-semibold outline-none focus:border-[#1822ff]"><option value="all">전체 형식</option><option value="text">텍스트</option><option value="image">이미지</option><option value="audio">오디오</option><option value="video">영상</option><option value="design">디자인</option></select>

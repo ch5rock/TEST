@@ -4,11 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import type { Inspiration } from "@/lib/types";
 
 const typeMeta: Record<string, { label: string; icon: LucideIcon; color: string }> = {
-  text: { label: "텍스트", icon: FileText, color: "bg-[#e7e8ff] text-[#1822ff]" },
-  image: { label: "이미지", icon: ImageIcon, color: "bg-[#e5f7e9] text-[#176b39]" },
+  text: { label: "텍스트", icon: FileText, color: "bg-[#dff4ff] text-[#126f9f]" },
+  image: { label: "이미지", icon: ImageIcon, color: "bg-[#e2fbd8] text-[#176b39]" },
   audio: { label: "오디오", icon: Music2, color: "bg-[#fff0c9] text-[#7a4b00]" },
-  video: { label: "영상", icon: Video, color: "bg-[#ffe4ee] text-[#9b174c]" },
-  design: { label: "디자인", icon: Shapes, color: "bg-[#e4f5ff] text-[#075985]" },
+  video: { label: "영상", icon: Video, color: "bg-[#ecffd0] text-[#537500]" },
+  design: { label: "디자인", icon: Shapes, color: "bg-[#cfefff] text-[#075985]" },
 };
 
 export function InspirationCard({ item, demo = false }: { item: Inspiration; demo?: boolean }) {
@@ -38,7 +38,7 @@ export function InspirationCard({ item, demo = false }: { item: Inspiration; dem
         </div>
         <span className="flex items-center gap-1 font-semibold"><Bookmark className="size-3.5" />{item.saveCount ?? 0}</span>
       </div>
-      {demo && <span className="absolute bottom-4 right-14 rounded-full bg-[#d7ff43] px-2 py-1 text-[11px] font-black">SAMPLE</span>}
+      {demo && <span className="absolute bottom-4 right-14 rounded-full bg-[#d5ff63] px-2 py-1 text-[11px] font-black">SAMPLE</span>}
     </article>
   );
 

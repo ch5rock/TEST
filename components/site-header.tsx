@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FolderKanban, Footprints, Plus, Sparkles, UserCircle } from "lucide-react";
+import { FolderKanban, Plus, Sparkles, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/auth";
 
@@ -10,11 +10,13 @@ export async function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-black/10 bg-[#f4fbff]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 sm:px-7">
         <div className="flex items-center gap-8">
-          <Link href="/" className="group flex items-center gap-2" aria-label="MOTIFOOT 홈">
-            <span className="grid size-9 -rotate-6 place-items-center rounded-[42%_58%_52%_48%] bg-[#d5ff63] text-[#126f9f] shadow-[0_3px_0_#9bdc68] transition-transform group-hover:rotate-6 group-hover:scale-105">
-              <Footprints className="size-5" />
+          <Link href="/" className="group" aria-label="MOTIFOOT 홈">
+            <span className="motifoot-wordmark" aria-hidden="true">
+              <span>MOTIF</span>
+              <span className="motifoot-step motifoot-step-blue">O</span>
+              <span className="motifoot-step motifoot-step-lime">O</span>
+              <span>T</span>
             </span>
-            <span className="text-lg font-black tracking-[-0.05em]">MOTI<span className="text-[#249bd3]">FOOT</span></span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex" aria-label="주요 메뉴">
             <Link href="/" className="nav-link">INFOOT</Link>

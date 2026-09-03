@@ -69,13 +69,13 @@ export function InspirationForm({ parentId }: { parentId?: string }) {
       </div>
       <div className="grid gap-2">
         <Label htmlFor="file">원본 파일 <span className="font-normal text-black/45">선택 · 최대 25MB</span></Label>
-        <label className="flex min-h-28 cursor-pointer items-center justify-center gap-3 rounded-2xl border border-dashed border-black/25 bg-white px-5 text-sm font-semibold transition hover:border-[#1822ff] hover:bg-[#f3f3ff]">
-          <UploadCloud className="size-5 text-[#1822ff]" />파일 선택
+        <label className="flex min-h-28 cursor-pointer items-center justify-center gap-3 rounded-2xl border border-dashed border-black/25 bg-white px-5 text-sm font-semibold transition hover:border-[#249bd3] hover:bg-[#effaff]">
+          <UploadCloud className="size-5 text-[#126f9f]" />파일 선택
           <Input id="file" name="file" type="file" className="sr-only" />
         </label>
       </div>
       {error && <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-700">{error}</p>}
-      <Button type="submit" size="lg" disabled={loading} className="h-13 rounded-full bg-[#1822ff] text-base text-white hover:bg-[#1119cc]">
+      <Button type="submit" size="lg" disabled={loading} className="h-13 rounded-full bg-[#126f9f] text-base text-white hover:bg-[#0d587e]">
         {loading ? "등록 중…" : "영감 공개하기"}<ArrowRight />
       </Button>
     </form>

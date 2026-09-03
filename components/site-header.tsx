@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { FolderKanban, Plus, Sparkles, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/auth";
@@ -12,7 +11,7 @@ export async function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4 sm:px-7">
         <div className="flex items-center gap-8">
           <Link href="/" className="shrink-0" aria-label="MOTIFOOT 홈">
-            <Image src="/motifoot-logo.png" alt="MOTIFOOT" width={160} height={102} className="h-12 w-auto rounded-md" priority />
+            <img src="/motifoot-logo-v2.png" alt="MOTIFOOT" width="160" height="102" className="h-12 w-auto rounded-md" />
           </Link>
           <nav className="hidden items-center gap-1 md:flex" aria-label="주요 메뉴">
             <Link href="/" className="nav-link">INFOOT</Link>

@@ -17,9 +17,9 @@ export async function SiteHeader() {
             <span className="text-lg font-black tracking-[-0.04em]">MOTIF</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex" aria-label="주요 메뉴">
-            <Link href="/" className="nav-link">영감</Link>
-            <Link href="/projects" className="nav-link">프로젝트</Link>
-            <Link href="/my" className="nav-link">내 작업실</Link>
+            <Link href="/" className="nav-link">INFOOT</Link>
+            <Link href="/projects" className="nav-link">OUTFOOT</Link>
+            <Link href="/my" className="nav-link">FOOTPRINT</Link>
           </nav>
         </div>
         <div className="flex items-center gap-2">
@@ -33,9 +33,9 @@ export async function SiteHeader() {
         </div>
       </div>
       <nav className="flex h-11 items-center gap-1 overflow-x-auto border-t border-black/5 px-4 md:hidden" aria-label="모바일 메뉴">
-        <Link href="/" className="nav-link"><Sparkles className="size-4" />영감</Link>
-        <Link href="/projects" className="nav-link"><FolderKanban className="size-4" />프로젝트</Link>
-        <Link href="/my" className="nav-link"><UserCircle className="size-4" />내 작업실</Link>
+        <Link href="/" className="nav-link"><Sparkles className="size-4" />INFOOT</Link>
+        <Link href="/projects" className="nav-link"><FolderKanban className="size-4" />OUTFOOT</Link>
+        <Link href="/my" className="nav-link"><UserCircle className="size-4" />FOOTPRINT</Link>
       </nav>
     </header>
   );

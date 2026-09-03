@@ -19,22 +19,31 @@ export async function POST(request: Request) {
     const parentId = String(form.get("parentId") ?? "").trim() || null;
     const price = Math.max(0, Number(form.get("price") ?? 0) || 0);
     const tags = String(form.get("tags") ?? "").split(",").map((tag) => tag.trim().replace(/^#/, "")).filter(Boolean).slice(0, 8);
-    const file = form.get("file");
+    const uploadId = String(form.get("uploadId") ?? "").trim();
+    const chunkCount = Math.max(0, Number(form.get("chunkCount") ?? 0) || 0);
+    const uploadedName = String(form.get("mediaName") ?? "").trim();
+    const uploadedType = String(form.get("mediaType") ?? "").trim();
+    const uploadedSize = Math.max(0, Number(form.get("mediaSize") ?? 0) || 0);
 
     if (!title || !summary) return Response.json({ error: "제목과 짧은 소개를 입력해주세요." }, { status: 400 });
     if (title.length > 80 || summary.length > 240 || body.length > 5000) return Response.json({ error: "입력 가능한 글자 수를 초과했습니다." }, { status: 400 });
     if (!allowedTypes.has(contentType) || !allowedLicenses.has(licenseType)) return Response.json({ error: "허용되지 않는 형식 또는 이용 범위입니다." }, { status: 400 });
-    if (file instanceof File && file.size > 25 * 1024 * 1024) return Response.json({ error: "파일은 25MB 이하만 올릴 수 있습니다." }, { status: 400 });
+    if (uploadedSize > 25 * 1024 * 1024) return Response.json({ error: "파일은 25MB 이하만 올릴 수 있습니다." }, { status: 400 });
+    if (uploadId && (!/^[0-9a-f-]{36}$/i.test(uploadId) || chunkCount < 1 || chunkCount > 40 || !uploadedName)) {
+      return Response.json({ error: "업로드된 파일 정보가 올바르지 않습니다." }, { status: 400 });
+    }
 
     const id = crypto.randomUUID();
     let mediaKey: string | null = null;
     let mediaName: string | null = null;
     let mediaType: string | null = null;
-    if (file instanceof File && file.size > 0) {
-      mediaKey = `${user.id}/${id}/${crypto.randomUUID()}`;
-      mediaName = file.name.slice(0, 180);
-      mediaType = file.type || "application/octet-stream";
-      await env.BUCKET.put(mediaKey, file.stream(), { httpMetadata: { contentType: mediaType } });
+    if (uploadId) {
+      const baseKey = `chunked/${user.id}/${uploadId}`;
+      const chunks = await Promise.all(Array.from({ length: chunkCount }, (_, index) => env.BUCKET.head(`${baseKey}/${index}`)));
+      if (chunks.some((chunk) => !chunk)) return Response.json({ error: "파일 조각이 일부 누락되었습니다. 다시 업로드해주세요." }, { status: 400 });
+      mediaKey = `${baseKey}/${chunkCount}`;
+      mediaName = uploadedName.slice(0, 180);
+      mediaType = uploadedType.slice(0, 120) || "application/octet-stream";
     }
 
     await ensureUser(user);
